@@ -136,7 +136,7 @@ function turnHoursToMinutes(moviesArray) {
       elem.duration.replace("h", "").replace("min", "").split(" ")
     );
   });
-  console.log(timeArray);
+
   timeArray.forEach((x) => {
     return convertHoursToMinutes(x[0], x[1]);
   });
@@ -144,7 +144,7 @@ function turnHoursToMinutes(moviesArray) {
   timeArray.forEach((x) => {
     toMinutes.push(convertHoursToMinutes(x[0], x[1]));
   });
-  //console.log(toMinutes);
+
   hourArray.map((x, index) => {
     x.duration = toMinutes[index];
   });

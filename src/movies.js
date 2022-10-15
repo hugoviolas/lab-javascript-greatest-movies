@@ -148,10 +148,47 @@ function turnHoursToMinutes(moviesArray) {
   hourArray.map((x, index) => {
     x.duration = toMinutes[index];
   });
-  console.log(hourArray);
   return hourArray;
 }
 turnHoursToMinutes([{ duration: "2h" }]);
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
-function bestYearAvg(moviesArray) {}
+function bestYearAvg(moviesArray) {
+  function makeAverage(arr) {
+    let bestScore = -Infinity;
+    let bestYear;
+    arr.map((elem) => {
+      console.log(bestYear);
+      if (elem.average === bestScore && bestYear > elem.year) {
+        bestYear = elem.year;
+      }
+      if (elem.average > bestScore) {
+        bestScore = elem.average;
+        bestYear = elem.year;
+      }
+    });
+    return `The best year was ${bestYear} with an average score of ${bestScore}`;
+  }
+  const years = [];
+  moviesArray.map((elem) => {
+    if (!years.filter((x) => x.year === elem.year).length > 0) {
+      let obj = {};
+      obj["year"] = elem.year;
+      years.push(obj);
+    }
+  });
+  years.map((film) => {
+    film["average"] = 0;
+    let score = 0;
+    let numbers = 0;
+    moviesArray.map((elem) => {
+      if (elem.year === film.year) {
+        numbers += 1;
+        score += elem.score;
+      }
+    });
+    film["average"] = score / numbers;
+  });
+  return moviesArray.length === 0 ? null : makeAverage(years);
+}
+bestYearAvg(moviesdata);
